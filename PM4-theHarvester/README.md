@@ -4,6 +4,8 @@
 
 **theHarvester** is a passive OSINT tool that gathers emails, sub-domains, hosts, and other public information about a target organization from dozens of public sources  without ever directly contacting the target.
 
+![theHarvester banner](theHarvester.png)
+
 ## 🎯 Objectives
 
 - Find email IDs & sub-domains for **microsoft.com** using Baidu as the source, limited to 1000 results
@@ -12,7 +14,7 @@
 
 ## 🪜 Steps & Findings
 
-### Task 1 — Baidu Source
+### Task 1 Baidu Source
 
 theHarvester -d microsoft.com -l 1000 -b baidu
 
@@ -20,7 +22,7 @@ theHarvester -d microsoft.com -l 1000 -b baidu
 
 Found email address(es) and host information using Baidu as the single data source.
 
-### Task 2 — All Sources
+### Task 2 All Sources
 
 theHarvester -d microsoft.com -l 50 -b all
 
