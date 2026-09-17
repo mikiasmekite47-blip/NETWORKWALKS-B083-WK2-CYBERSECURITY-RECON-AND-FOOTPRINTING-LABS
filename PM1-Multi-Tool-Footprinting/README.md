@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This lab uses six built-in Kali Linux tools to footprint the live website **networkwalks.com**, gathering public information about the domain, its technologies, IP address, HTTP headers, firewall presence, and DNS records — all without directly attacking the target.
+This lab uses six built-in Kali Linux tools to footprint the live website **networkwalks.com**, gathering public information about the domain, its technologies, IP address, HTTP headers, firewall presence, and DNS records all without directly attacking the target.
 
 ## 🎯 Objectives
 
@@ -15,23 +15,23 @@ This lab uses six built-in Kali Linux tools to footprint the live website **netw
 
 ## 🪜 Steps & Findings
 
-### 1️⃣ whois — Domain Registration
+### 1️ whois  Domain Registration
 
 whois networkwalks.com
 
 ![whois output](whois-output.png)
 
-Revealed the registrar (GoDaddy), registration/expiry dates, and name servers pointing to HostGator — instantly showing the hosting provider.
+Revealed the registrar (GoDaddy), registration/expiry dates, and name servers pointing to HostGator instantly showing the hosting provider.
 
-### 2️⃣ whatweb — Technology Fingerprinting
+### 2️ whatweb Technology Fingerprinting
 
 whatweb networkwalks.com
 
 ![whatweb output](whatweb-output.png)
 
-Identified the site runs on **Apache** with **WordPress**, including specific plugin versions — information an attacker could use to search for known vulnerabilities.
+Identified the site runs on **Apache** with **WordPress**, including specific plugin versions information an attacker could use to search for known vulnerabilities.
 
-### 3️⃣ nslookup — DNS Resolution
+### 3️ nslookup  DNS Resolution
 
 nslookup networkwalks.com
 
@@ -39,7 +39,7 @@ nslookup networkwalks.com
 
 Resolved the domain to its real IP address.
 
-### 4️⃣ curl -I — HTTP Headers
+### 4️ curl -I  HTTP Headers
 
 curl -I https://networkwalks.com
 
@@ -47,7 +47,7 @@ curl -I https://networkwalks.com
 
 Showed server banner, caching headers, and a WordPress REST API endpoint (`/wp-json/`).
 
-### 5️⃣ wafw00f — Firewall Detection
+### 5️ wafw00f Firewall Detection
 
 wafw00f networkwalks.com
 
@@ -55,7 +55,7 @@ wafw00f networkwalks.com
 
 Confirmed the site is protected by **ModSecurity (SpiderLabs) WAF**.
 
-### 6️⃣ dnsrecon — DNS Enumeration
+### 6️ dnsrecon  DNS Enumeration
 
 dnsrecon -d networkwalks.com
 ![dnsrecon output](dnsrecon-output.png)
@@ -64,7 +64,7 @@ Enumerated name servers, mail servers, SPF/TXT records, and cPanel service recor
 
 ## 🐞 Problem Encountered & Solution
 
-While running `whatweb networkwalks.com`, the command failed with an **"execution expired"** error (a timeout — whatweb couldn't get a response from the target in time). This was likely a transient network/connectivity hiccup rather than an issue with the tool or target itself.
+While I was running `whatweb networkwalks.com`, the command failed with an **"execution expired"** error. This was likely a network/connectivity problem rather than an issue with the tool or target itself.
 
 ![whatweb timeout error](error-in-whatweb.png)
 
@@ -76,7 +76,7 @@ While running `whatweb networkwalks.com`, the command failed with an **"executio
   
 - Each tool reveals a different layer: `whois` and DNS tools expose ownership/hosting, `whatweb`/`curl` expose the tech stack, and `wafw00f` reveals defensive measures.
   
-- Real-world tools can be flaky — transient timeouts don't always mean something is broken; retrying is a normal part of the workflow.
+- Real world tools can be flaky transient timeouts don't always mean something is broken; retrying is a normal part of the workflow.
 
 ## ⚠️ Ethical Note
 
